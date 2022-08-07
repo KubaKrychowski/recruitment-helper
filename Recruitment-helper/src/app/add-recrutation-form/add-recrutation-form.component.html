@@ -8,25 +8,26 @@
     <form>
       <div class="row w-100">
         <div class="col-5">
-          <label class="form-label"> Company name </label>
+          <label for="company-name" class="form-label"> Company name </label>
+          <input id="company-name" type="text" class="form-control" />
 
-          <input type="text" class="form-control" />
-
-          <label class="form-label mt-3"> Company description </label>
-
+          <label for="company-description" class="form-label mt-3"> Company description </label>
           <textarea
+            id="company-description"
             class="form-control"
             placeholder="Say something about that company..."
           ></textarea>
 
-          <label class="form-label mt-3">Position</label>
+          <label for="position" class="form-label mt-3"> Position</label>
+          <input id="position" type="text" class="form-control" />
 
-          <input type="text" class="form-control" f />
+          <label for="hr-name" class="form-label mt-3">Recruiters' name</label>
+          <input id="hr-name" type="text" class="form-control" />
 
           <div>
-            <label class="form-label mt-3">Work type</label>
+            <label for="work-type" class="form-label mt-3">Work type</label>
 
-            <select type="text" class="form-select">
+            <select id="work-type" type="text" class="form-select">
               <option selected>Choose work type</option>
 
               <option value="1">Hybrid</option>
@@ -38,18 +39,30 @@
               </option>
             </select>
           </div>
+
+          <label for="work-lang" class="form-label mt-3">Work Language</label>
+          <input id="work-lang" type="text" class="form-control" />
+
+          <label for="recru-lang" class="form-label mt-3">Recrutation Language</label>
+          <input id="recru-lang" type="text" class="form-control" />
         </div>
 
         <div class="col-5">
-          <div class="col-xs-12 col-md-4 form-group mb-3">
-            <label class="form-label"> Meeting Date </label>
+          <div class="col-xs-12 col-md-4 form-group mb-3 w-100">
+            <label for="meeting-date" class="form-label"> Meeting Date </label>
 
             <input
               type="text"
+              id="meeting-date"
               class="form-control"
               [bsConfig]="{ isAnimated: true }"
               bsDatepicker
             />
+          </div>
+
+          <div class="w-100 mt-3">
+            <label class="form-label">Meeting Hour</label>
+            <timepicker></timepicker>
           </div>
 
           <div class="form-check mt-3">
@@ -107,7 +120,44 @@
               </label>
             </div>
 
-            <label class="form-label mt-3"> comment </label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                exclusive
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                holiday
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                is extra paid (if exclusive)
+              </label>
+            </div>
+
+            <label class="form-label mt-3">Website URL</label>
+
+            <input type="text" class="form-control" />
+
+            <label class="form-label mt-3"> comments </label>
 
             <textarea
               class="form-control"

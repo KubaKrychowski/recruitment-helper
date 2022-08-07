@@ -11,6 +11,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { LeaveConfirmationDialogComponent } from './leave-confirmation-dialog/leave-confirmation-dialog.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +27,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    TimepickerModule.forRoot(),
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent]
