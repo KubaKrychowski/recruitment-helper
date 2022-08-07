@@ -1,0 +1,131 @@
+<section class="container-fluid p-4">
+  <header class="header">
+    <h1 class="fs-1">Add new recrtutation</h1>
+    <hr />
+  </header>
+
+  <article>
+    <form>
+      <div class="row w-100">
+        <div class="col-5">
+          <label class="form-label"> Company name </label>
+
+          <input type="text" class="form-control" />
+
+          <label class="form-label mt-3"> Company description </label>
+
+          <textarea
+            class="form-control"
+            placeholder="Say something about that company..."
+          ></textarea>
+
+          <label class="form-label mt-3">Position</label>
+
+          <input type="text" class="form-control" f />
+
+          <div>
+            <label class="form-label mt-3">Work type</label>
+
+            <select type="text" class="form-select">
+              <option selected>Choose work type</option>
+
+              <option value="1">Hybrid</option>
+
+              <option value="2">onsite</option>
+
+              <option value="3">
+                Remote
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-5">
+          <div class="col-xs-12 col-md-4 form-group mb-3">
+            <label class="form-label"> Meeting Date </label>
+
+            <input
+              type="text"
+              class="form-control"
+              [bsConfig]="{ isAnimated: true }"
+              bsDatepicker
+            />
+          </div>
+
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Is salary ranged
+            </label>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-5">
+              <label class="form-label" for="">Min. Salary</label>
+              <input type="number" class="form-control" />
+            </div>
+
+            <div class="col-5">
+              <label class="form-label" for="">Max. Salary</label>
+              <input type="number" class="form-control" />
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label mt-3">Employment type</label>
+
+            <select type="text" class="form-select">
+              <option selected>Choose employment type</option>
+
+              <option value="1">employment contract</option>
+
+              <option value="2">order contract</option>
+
+              <option value="3">
+                contract for performance of a specific task
+              </option>
+
+              <option value="4">B2B</option>
+            </select>
+          </div>
+
+          <h6 class="mt-3">Extra informations:</h6>
+          <hr />
+          <div class="row-5 mt-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Micro-services/Micro-front-ends
+              </label>
+            </div>
+
+            <label class="form-label mt-3"> comment </label>
+
+            <textarea
+              class="form-control"
+              placeholder="Say something unincluded in form..."
+            ></textarea>
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="buttons row">
+      <button class="btn btn-primary col-1">Clear form</button>
+
+      <button class="btn btn-danger col-1">Cancel</button>
+
+      <button class="btn btn-success col-1">Add</button>
+    </div>
+  </article>
+</section>

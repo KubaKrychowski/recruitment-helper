@@ -1,0 +1,66 @@
+<section>
+  <header class="col p-3">
+    <h1>Welcome to Recruitment Helper</h1>
+  </header>
+
+  <article class="container row">
+    <div class="col-5">
+      <h3>Upcomming calls</h3>
+      <ul class="list-group">
+        <li class="list-group-item border border-secondary">
+          <div class="event-card row">
+            <div class="company-picture col">
+              <img style="background-color: black; width: 20%" src="../../assets/recruitment-helper-logo.png" alt="">
+            </div>
+
+            <div class="col">
+              <h5>Company Name</h5>
+              <h6>
+                Head Recruiter
+              </h6>
+            </div>
+
+            <div class="col">
+              <div class="row">
+                Date: 07.10.2022
+              </div>
+
+              <div class="row">
+                Time: 10:00
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-5">
+      <h3>
+        Quick actions panel
+      </h3>
+
+      <div class="row p-3">
+        <button (click)="goToAddRecruForm()" type="button" class="btn btn-success col-5 add-button">
+            <i class="bi bi-plus-square-fill"></i>
+            Add new recrutation
+        </button>
+
+        <button type="button" class="btn btn-warning col-5 add-button ms-3">
+          <i class="bi bi-x-circle-fill"></i>
+          Close existing recrutation
+        </button>
+      </div>
+
+      <div class="row p-3">
+        <button class="btn btn-primary col-5 add-button">
+          <i class="bi bi-eye-fill"></i>
+
+          Check your recrutations
+        </button>
+
+      </div>
+    </div>
+  </article>
+
+  <app-leave-confirmation-dialog-component></app-leave-confirmation-dialog-component>
+</section>
