@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left row w-100">
+    <i class="bi bi-check-circle"></i>
+
+    Confirm Changes
+  </h4>
+</div>
+<div class="modal-body">
+  <div *ngIf="emptyControlsArray">
+    <h5 class="row">
+      <i class="bi bi-exclamation-triangle"></i>
+      You've missed some fields:
+
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let emptyControl of emptyControlsArray"
+        >
+          {{ emptyControl }}
+        </li>
+      </ul>
+    </h5>
+  </div>
+
+  <div class="row w-100 buttons mt-3">
+    <button (click)="confirm()" class="btn btn-primary col-4">Accept</button>
+
+    <button (click)="decline()" class="btn btn-danger col-4">Decline</button>
+  </div>
+</div>

@@ -13,6 +13,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmChangesDialogComponent } from './add-recrutation-form/confirm-changes-dialog/confirm-changes-dialog.component';
+import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     NavBarComponent,
     AddRecrutationFormComponent,
-    LeaveConfirmationDialogComponent
+    LeaveConfirmationDialogComponent,
+    ConfirmChangesDialogComponent,
+    MyRecrutationsComponent
   ],
   imports: [
     BrowserModule,

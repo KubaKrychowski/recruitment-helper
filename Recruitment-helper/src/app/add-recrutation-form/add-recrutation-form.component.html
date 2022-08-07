@@ -5,7 +5,7 @@
   </header>
 
   <article>
-    <form [formGroup]="_form">
+    <form (ngSubmit)="onSubmit()" [formGroup]="_form">
       <div class="row w-100">
         <div class="col-5 border-end">
           <h6 class="mt-3 text text-primary">Basic informations:</h6>
@@ -20,8 +20,23 @@
               id="company-name"
               type="text"
               class="form-control"
+              [class.border-danger]="
+                !basicInformationsForm.controls['companyName'].valid &&
+                basicInformationsForm.controls['companyName'].touched
+              "
               formControlName="companyName"
             />
+            <small
+              *ngIf="
+                !basicInformationsForm.valid &&
+                basicInformationsForm.controls['companyName'].touched
+              "
+              class="text text-danger"
+            >
+              Company Name is required
+            </small>
+
+            <br />
 
             <label for="company-description" class="form-label mt-3">
               Company description
@@ -39,7 +54,23 @@
               type="text"
               class="form-control"
               formControlName="position"
+              [class.border-danger]="
+                !basicInformationsForm.controls['position'].valid &&
+                basicInformationsForm.controls['position'].touched
+              "
             />
+
+            <small
+              *ngIf="
+                !basicInformationsForm.controls['position'].valid &&
+                basicInformationsForm.controls['position'].touched
+              "
+              class="text text-danger"
+            >
+              Position is required
+            </small>
+
+            <br />
 
             <label for="hr-name" class="form-label mt-3"
               >Recruiters' name</label
@@ -75,6 +106,11 @@
                 id="work-type"
                 type="text"
                 class="form-select"
+                [class.border-danger]="
+                  !workOrganizationInformationsForm.controls['workType']
+                    .valid &&
+                  workOrganizationInformationsForm.controls['workType'].touched
+                "
               >
                 <option [value]="null" disabled selected>
                   Choose work type
@@ -85,20 +121,49 @@
 
                 <option value="remote">Remote</option>
               </select>
-              
-              <label for="work-lang" class="form-label mt-3">Work Language</label>
+
+              <small
+                *ngIf="
+                  !workOrganizationInformationsForm.controls['workType']
+                    .valid &&
+                  workOrganizationInformationsForm.controls['workType'].touched
+                "
+                class="text text-danger"
+              >
+                Work type is required
+              </small>
+
+              <br />
+
+              <label for="work-lang" class="form-label mt-3"
+                >Work Language</label
+              >
               <input
                 id="work-lang"
                 type="text"
                 class="form-control"
                 formControlName="workLang"
+                [class.border-danger]="
+                  !workOrganizationInformationsForm.controls['workLang']
+                    .valid &&
+                  workOrganizationInformationsForm.controls['workLang'].touched
+                "
               />
+
+              <small
+                *ngIf="
+                  !workOrganizationInformationsForm.controls['workLang']
+                    .valid &&
+                  workOrganizationInformationsForm.controls['workLang'].touched
+                "
+                class="text text-danger"
+              >
+                work language is required
+              </small>
             </div>
           </form>
 
           <!-- Rewrite to enums -->
-
-
         </div>
 
         <div class="col-5">
@@ -116,7 +181,27 @@
               id="recru-lang"
               type="text"
               class="form-control"
+              [class.border-danger]="
+                !recrutationInformationsForm.controls['recrutationLanguage']
+                  .valid &&
+                recrutationInformationsForm.controls['recrutationLanguage']
+                  .touched
+              "
             />
+
+            <small
+              *ngIf="
+                !recrutationInformationsForm.controls['recrutationLanguage']
+                  .valid &&
+                recrutationInformationsForm.controls['recrutationLanguage']
+                  .touched
+              "
+              class="text text-danger"
+            >
+              Language is required
+            </small>
+
+            <br />
 
             <div class="col-xs-12 col-md-4 form-group mb-3 w-100 mt-3">
               <label for="meeting-date" class="form-label">
@@ -129,12 +214,43 @@
                 class="form-control"
                 [bsConfig]="{ isAnimated: true }"
                 bsDatepicker
+                formControlName="meetingDate"
+                [class.border-danger]="
+                  !recrutationInformationsForm.controls['meetingDate'].valid &&
+                  recrutationInformationsForm.controls['meetingDate'].touched
+                "
               />
+
+              <small
+                *ngIf="
+                  !recrutationInformationsForm.controls['meetingDate'].valid &&
+                  recrutationInformationsForm.controls['meetingDate'].touched
+                "
+                class="text text-danger"
+              >
+                Meeting date is required
+              </small>
             </div>
 
             <div class="w-100 mt-3">
               <label class="form-label">Meeting Hour</label>
-              <timepicker></timepicker>
+              <timepicker
+                formControlName="meetingHour"
+                [class.border-danger]="
+                  !recrutationInformationsForm.controls['meetingHour'].valid &&
+                  recrutationInformationsForm.controls['meetingHour'].touched
+                "
+              ></timepicker>
+
+              <small
+                *ngIf="
+                  !recrutationInformationsForm.controls['meetingHour'].valid &&
+                  recrutationInformationsForm.controls['meetingHour'].touched
+                "
+                class="text text-danger"
+              >
+                Meeting hour is required
+              </small>
             </div>
 
             <div class="form-check mt-3">
@@ -165,7 +281,17 @@
                 >Employment type</label
               >
 
-              <select id="employment-type" type="text" class="form-select">
+              <select
+                id="employment-type"
+                type="text"
+                class="form-select"
+                formControlName="employmentType"
+                [class.border-danger]="
+                  !recrutationInformationsForm.controls['employmentType']
+                    .valid &&
+                  recrutationInformationsForm.controls['employmentType'].touched
+                "
+              >
                 <option selected>Choose employment type</option>
 
                 <option value="1">employment contract</option>
@@ -178,6 +304,17 @@
 
                 <option value="4">B2B</option>
               </select>
+
+              <small
+                *ngIf="
+                  !recrutationInformationsForm.controls['employmentType']
+                    .valid &&
+                  recrutationInformationsForm.controls['employmentType'].touched
+                "
+                class="text text-danger"
+              >
+                Employment type is required
+              </small>
             </div>
           </form>
           <h6 class="mt-3 text text-warning">Extra informations:</h6>
@@ -213,16 +350,16 @@
           </div>
         </div>
       </div>
+
+      <hr class="border border-secondary border-1 mt-5" />
+
+      <div class="buttons row-5 d-flex">
+        <button class="btn btn-danger col-1">Cancel</button>
+
+        <button class="btn btn-primary col-1 ms-auto">Clear form</button>
+
+        <button type="submit" class="btn btn-success col-1">Add</button>
+      </div>
     </form>
-
-    <hr class="border border-secondary border-1 mt-5" />
-
-    <div class="buttons row-5 d-flex">
-      <button class="btn btn-danger col-1">Cancel</button>
-
-      <button class="btn btn-primary col-1 ms-auto">Clear form</button>
-
-      <button class="btn btn-success col-1">Add</button>
-    </div>
   </article>
 </section>

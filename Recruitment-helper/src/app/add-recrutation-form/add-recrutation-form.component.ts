@@ -1,14 +1,16 @@
+import { ConfirmChangesDialogComponent } from './confirm-changes-dialog/confirm-changes-dialog.component';
 import { ExtranInformationCheckboxModel } from './../shared/models/extra-information-checkbox.model';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { from } from 'rxjs';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-recrutation-form',
   templateUrl: './add-recrutation-form.component.html',
   styleUrls: ['./add-recrutation-form.component.scss'],
 })
-export class AddRecrutationFormComponent implements OnInit {
+export class AddRecrutationFormComponent {
   public readonly extraCheckboxesArray: Array<ExtranInformationCheckboxModel> =
     [
       {
@@ -24,7 +26,7 @@ export class AddRecrutationFormComponent implements OnInit {
         formControlName: 'holiday',
       },
       {
-        label: 'is extra paid (if exlusive)',
+        label: 'is extra paid (if exclusive)',
         formControlName: 'isExtraPaid',
       },
     ];
@@ -82,7 +84,7 @@ export class AddRecrutationFormComponent implements OnInit {
     return this.form;
   }
 
-  constructor() {
+  constructor(private bsModalRef: BsModalRef, private modalService: BsModalService,private router: Router) {
     for (
       let controlIndex = 0;
       controlIndex < this.extraCheckboxesArray.length;
@@ -90,11 +92,56 @@ export class AddRecrutationFormComponent implements OnInit {
     ) {
       const controlName =
         this.extraCheckboxesArray[controlIndex].formControlName;
-      this.extraInformations.addControl(
-        controlName,
-        new FormControl(null)
-      );
+      this.extraInformations.addControl(controlName, new FormControl(null));
     }
   }
-  ngOnInit(): void {}
+
+  onSubmit(): void {
+    this._form.markAllAsTouched();
+
+    if (this._form.valid) {
+      let tempControls = [];
+
+      for (const field in this._form.controls) {
+        const controlsArray = this._form.get(field)?.value;
+        for (const [controlName, controlValue] of Object.entries(
+          controlsArray
+        )) {
+          if (controlValue === null) {
+            tempControls.push(controlName);
+          }
+        }
+      }
+
+      //* open confirm modal
+      this.openConfirmationDialog(tempControls);
+      this.bsModalRef.content.onClose.subscribe((res: boolean) => {
+        if(res){
+        //TODO: Send request to api with data
+        this.router.navigate(['/home']);
+        }else {
+          return;
+        }
+      })
+    } else {
+      //TODO: add notification wrong data or smth like that
+    }
+  }
+
+  private openConfirmationDialog(data: any) {
+    const initialState: ModalOptions = {
+      initialState: {
+        emptyControlsArray: data,
+        title: 'confirm changes',
+        class: 'modal-lg'
+      }
+    };
+
+    this.bsModalRef = this.modalService.show(ConfirmChangesDialogComponent, initialState);
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  ngOnDestroy(): void {
+    this.bsModalRef.content?.onClose.unSubscribe();
+  }
 }
