@@ -1,3 +1,5 @@
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { ApiService } from './services/api.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,6 +17,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmChangesDialogComponent } from './add-recrutation-form/confirm-changes-dialog/confirm-changes-dialog.component';
 import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.component';
+import { RecrutationInfoItemComponent } from './my-recrutations/recrutation-info-item/recrutation-info-item.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.compo
     AddRecrutationFormComponent,
     LeaveConfirmationDialogComponent,
     ConfirmChangesDialogComponent,
-    MyRecrutationsComponent
+    MyRecrutationsComponent,
+    RecrutationInfoItemComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +41,9 @@ import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.compo
     TimepickerModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule
   ],
-  providers: [BsModalService],
+  providers: [BsModalService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

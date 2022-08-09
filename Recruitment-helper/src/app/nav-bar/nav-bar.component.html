@@ -5,18 +5,34 @@
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
       >
         <div>
-
-          <img style="height: 64px; width: auto; color: white;" src="../assets/recruitment-helper-logo.png" alt="">
-
+          <img
+            style="height: 64px; width: auto; color: white"
+            src="../assets/recruitment-helper-logo.png"
+            alt=""
+          />
         </div>
         <ul
           class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small"
         >
           <li>
-            <div (click)="goToHomePage()" class="nav-link text-white col text-align-center">
+            <div
+              (click)="goToHomePage()"
+              class="nav-link text-white col text-align-center"
+            >
               <i class="bi bi-house-door"></i>
 
               <p class="m-0">Home</p>
+            </div>
+          </li>
+
+          <li>
+            <div
+              (click)="goToRecruPage()"
+              class="nav-link text-white col text-align-center"
+            >
+              <i class="bi bi-list-columns-reverse"></i>
+
+              <p class="m-0">My recrutations</p>
             </div>
           </li>
 
@@ -33,6 +49,12 @@
 
               <p class="m-0">Notes</p>
             </a>
+          </li>
+
+          <li class="d-flex">
+            <button (click)="goToLoginPage()" type="button" class="btn btn-outline-light me-2 login-button">
+              Login
+            </button>
           </li>
         </ul>
       </div>

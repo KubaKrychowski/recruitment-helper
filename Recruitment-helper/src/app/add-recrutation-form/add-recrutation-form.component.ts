@@ -1,9 +1,13 @@
+import { v4 } from 'uuid';
+import { NewRecrutationDto } from './../shared/models/newRecrutationDto';
+import { ApiService } from './../services/api.service';
 import { ConfirmChangesDialogComponent } from './confirm-changes-dialog/confirm-changes-dialog.component';
 import { ExtranInformationCheckboxModel } from './../shared/models/extra-information-checkbox.model';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-add-recrutation-form',
@@ -84,7 +88,12 @@ export class AddRecrutationFormComponent {
     return this.form;
   }
 
-  constructor(private bsModalRef: BsModalRef, private modalService: BsModalService,private router: Router) {
+  constructor(
+    private bsModalRef: BsModalRef,
+    private modalService: BsModalService,
+    private router: Router,
+    private apiService: ApiService
+  ) {
     for (
       let controlIndex = 0;
       controlIndex < this.extraCheckboxesArray.length;
@@ -101,28 +110,31 @@ export class AddRecrutationFormComponent {
 
     if (this._form.valid) {
       let tempControls = [];
-
+      let newRecrutationDto: any = { recrutationExternalId: v4() };
       for (const field in this._form.controls) {
         const controlsArray = this._form.get(field)?.value;
+
+        //*iterate over all controls
         for (const [controlName, controlValue] of Object.entries(
           controlsArray
         )) {
+          newRecrutationDto[controlName] = controlValue;
+
           if (controlValue === null) {
             tempControls.push(controlName);
           }
         }
       }
-
-      //* open confirm modal
       this.openConfirmationDialog(tempControls);
       this.bsModalRef.content.onClose.subscribe((res: boolean) => {
-        if(res){
-        //TODO: Send request to api with data
-        this.router.navigate(['/home']);
-        }else {
+        if (res) {
+          this.apiService.sendPostRequest(newRecrutationDto).subscribe(res => console.log(res));
+
+          this.router.navigate(['/home']);
+        } else {
           return;
         }
-      })
+      });
     } else {
       //TODO: add notification wrong data or smth like that
     }
@@ -133,15 +145,14 @@ export class AddRecrutationFormComponent {
       initialState: {
         emptyControlsArray: data,
         title: 'confirm changes',
-        class: 'modal-lg'
-      }
+        class: 'modal-lg',
+      },
     };
 
-    this.bsModalRef = this.modalService.show(ConfirmChangesDialogComponent, initialState);
+    this.bsModalRef = this.modalService.show(
+      ConfirmChangesDialogComponent,
+      initialState
+    );
     this.bsModalRef.content.closeBtnName = 'Close';
-  }
-
-  ngOnDestroy(): void {
-    this.bsModalRef.content?.onClose.unSubscribe();
   }
 }

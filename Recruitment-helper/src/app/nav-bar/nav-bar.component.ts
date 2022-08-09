@@ -16,4 +16,13 @@ export class NavBarComponent implements OnInit {
   goToHomePage(): void {
     this.router.navigate(['home']);
   }
+
+  goToRecruPage(): void {
+    this.router.navigate(['my-recrutations']);
+  }
+
+  goToLoginPage(): void {
+    this.router.navigate(['log-in']);
+  }
+
 }
