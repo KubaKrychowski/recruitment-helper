@@ -1,5 +1,4 @@
 import { v4 } from 'uuid';
-import { NewRecrutationDto } from './../shared/models/newRecrutationDto';
 import { ApiService } from './../services/api.service';
 import { ConfirmChangesDialogComponent } from './confirm-changes-dialog/confirm-changes-dialog.component';
 import { ExtranInformationCheckboxModel } from './../shared/models/extra-information-checkbox.model';
@@ -7,7 +6,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-recrutation-form',
@@ -45,6 +45,8 @@ export class AddRecrutationFormComponent {
   public get basicInformationsForm(): FormGroup {
     return this.basicInformations;
   }
+
+  public onloading: boolean = false;
 
   private workOrganizationInformations: FormGroup = new FormGroup({
     workType: new FormControl(null, Validators.required),
@@ -91,7 +93,7 @@ export class AddRecrutationFormComponent {
   constructor(
     private bsModalRef: BsModalRef,
     private modalService: BsModalService,
-    private router: Router,
+    public router: Router,
     private apiService: ApiService
   ) {
     for (
@@ -110,7 +112,14 @@ export class AddRecrutationFormComponent {
 
     if (this._form.valid) {
       let tempControls = [];
-      let newRecrutationDto: any = { recrutationExternalId: v4() };
+      let newRecrutationDto: any = {};
+      let recrutationInformations = this._form.controls[
+        'recrutationInformations'
+      ] as FormGroup;
+      let meetingDate = recrutationInformations.controls['meetingDate']
+        .value as Date;
+      let meetingHour = recrutationInformations.controls['meetingHour']
+        .value as Date;
       for (const field in this._form.controls) {
         const controlsArray = this._form.get(field)?.value;
 
@@ -118,19 +127,37 @@ export class AddRecrutationFormComponent {
         for (const [controlName, controlValue] of Object.entries(
           controlsArray
         )) {
-          newRecrutationDto[controlName] = controlValue;
+          if (controlName === 'meetingDate') {
+            newRecrutationDto['meetingDate'] = this.setDateTime(
+              meetingDate,
+              meetingHour
+            );
+          } else {
+            newRecrutationDto[controlName] = controlValue;
+          }
 
           if (controlValue === null) {
             tempControls.push(controlName);
           }
         }
       }
+
       this.openConfirmationDialog(tempControls);
       this.bsModalRef.content.onClose.subscribe((res: boolean) => {
         if (res) {
-          this.apiService.sendPostRequest(newRecrutationDto).subscribe(res => console.log(res));
-
-          this.router.navigate(['/home']);
+          newRecrutationDto['recrutationExternalId'] = v4();
+          this.apiService
+            .sendPostRequest(newRecrutationDto)
+            .pipe(
+              catchError(this.errorHandler),
+              tap((result) => {
+                console.log(result);
+                this.router.navigate(['/home']);
+              })
+            )
+            .subscribe(() => {
+              return;
+            });
         } else {
           return;
         }
@@ -154,5 +181,29 @@ export class AddRecrutationFormComponent {
       initialState
     );
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.log('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.log(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+
+  setDateTime(date: Date, time: Date) {
+    date.setHours(time.getHours());
+    date.setMinutes(time.getMinutes());
+    return date;
   }
 }
