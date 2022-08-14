@@ -28,7 +28,7 @@
             />
             <small
               *ngIf="
-                !basicInformationsForm.valid &&
+                !basicInformationsForm.controls['companyName'].valid &&
                 basicInformationsForm.controls['companyName'].touched
               "
               class="text text-danger"

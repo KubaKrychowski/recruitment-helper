@@ -128,7 +128,7 @@ export class AddRecrutationFormComponent {
           controlsArray
         )) {
           if (controlName === 'meetingDate') {
-            newRecrutationDto['meetingDate'] = this.setDateTime(
+            newRecrutationDto['meetingDateAndHour'] = this.setDateTime(
               meetingDate,
               meetingHour
             );
@@ -185,25 +185,24 @@ export class AddRecrutationFormComponent {
 
   private errorHandler(error: HttpErrorResponse) {
     if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
       console.log('An error occurred:', error.error);
     } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
       console.log(
         `Backend returned code ${error.status}, body was: `,
         error.error
       );
     }
-    // Return an observable with a user-facing error message.
     return throwError(
       () => new Error('Something bad happened; please try again later.')
     );
   }
 
   setDateTime(date: Date, time: Date) {
+    console.log(date, time);
     date.setHours(time.getHours());
+    console.log(date);
     date.setMinutes(time.getMinutes());
+    console.log(date);
     return date;
   }
 }
