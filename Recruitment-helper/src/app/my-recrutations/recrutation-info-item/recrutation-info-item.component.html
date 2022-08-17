@@ -1,1 +1,25 @@
-<p>recrutation-info-item works!</p>
+<div *ngIf="recrutation" (click)="openMoreInformationsDialog()" class="row d-flex border align-items-center mt-3 recru-pill">
+  <div class="col">
+    {{recrutation.companyName}}
+  </div>
+
+  <ng-container *ngIf="recrutation.salary; else rangedSalary">
+    {{recrutation.salalary}}
+  </ng-container>
+
+  <ng-template #rangedSalary>
+   <div class="col">
+    <div class="row">
+      {{recrutation.minSalary}} PLN - {{recrutation.maxSalary}} PLN
+    </div>
+    </div>
+  </ng-template>
+
+  <div class="col">
+    {{recrutation.position}}
+  </div>
+
+  <div class="col">
+    {{recrutation.workType}}
+  </div>
+</div>

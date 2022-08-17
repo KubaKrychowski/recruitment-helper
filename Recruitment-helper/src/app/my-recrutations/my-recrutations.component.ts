@@ -23,6 +23,7 @@ export class MyRecrutationsComponent implements OnInit {
         catchError(this.errorHandler),
         tap((result) => {
           this.recrutations = result;
+          console.log(this.recrutations);
         })
       )
       .subscribe(() => {

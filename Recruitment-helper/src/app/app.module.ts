@@ -19,6 +19,7 @@ import { ConfirmChangesDialogComponent } from './add-recrutation-form/confirm-ch
 import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.component';
 import { RecrutationInfoItemComponent } from './my-recrutations/recrutation-info-item/recrutation-info-item.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { RecrutationInfoItemExtendedDialogComponent } from './my-recrutations/recrutation-info-item-extended-dialog/recrutation-info-item-extended-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LogInComponent } from './log-in/log-in.component';
     ConfirmChangesDialogComponent,
     MyRecrutationsComponent,
     RecrutationInfoItemComponent,
-    LogInComponent
+    LogInComponent,
+    RecrutationInfoItemExtendedDialogComponent
   ],
   imports: [
     BrowserModule,

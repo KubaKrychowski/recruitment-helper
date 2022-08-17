@@ -27,10 +27,7 @@ export class LeaveConfirmationDialogComponent {
   }
 }
 
-/* This is a component which we pass in modal*/
-
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'modal-content',
   template: `
     <div class="modal-header">
@@ -50,14 +47,11 @@ export class LeaveConfirmationDialogComponent {
   `
 })
 
-export class ModalContentComponent implements OnInit {
+export class ModalContentComponent {
   title?: string;
   closeBtnName?: string;
   list: any[] = [];
 
   constructor(public bsModalRef: BsModalRef) {}
 
-  ngOnInit() {
-    this.list.push('PROFIT!!!');
-  }
 }
