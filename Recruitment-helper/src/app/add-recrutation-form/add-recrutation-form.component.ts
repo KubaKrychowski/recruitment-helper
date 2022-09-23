@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-recrutation-form.component.scss'],
 })
 export class AddRecrutationFormComponent {
+  public onloading: boolean = false;
+  // TODO: Create other file for holding definitions
   public readonly extraCheckboxesArray: Array<ExtranInformationCheckboxModel> =
     [
       {
@@ -34,6 +36,7 @@ export class AddRecrutationFormComponent {
         formControlName: 'isExtraPaid',
       },
     ];
+    // form groups
   private basicInformations: FormGroup = new FormGroup({
     companyName: new FormControl(null, Validators.required),
     companyDescription: new FormControl(null),
@@ -41,22 +44,10 @@ export class AddRecrutationFormComponent {
     recruitersName: new FormControl(null),
     websiteUrl: new FormControl(null),
   });
-
-  public get basicInformationsForm(): FormGroup {
-    return this.basicInformations;
-  }
-
-  public onloading: boolean = false;
-
   private workOrganizationInformations: FormGroup = new FormGroup({
     workType: new FormControl(null, Validators.required),
     workLang: new FormControl(null, Validators.required),
   });
-
-  public get workOrganizationInformationsForm(): FormGroup {
-    return this.workOrganizationInformations;
-  }
-
   private recrutationInformations: FormGroup = new FormGroup({
     recrutationLanguage: new FormControl(null, Validators.required),
     meetingDate: new FormControl(null, Validators.required),
@@ -66,26 +57,28 @@ export class AddRecrutationFormComponent {
     maxSalary: new FormControl(null),
     employmentType: new FormControl(null, Validators.required),
   });
-
-  public get recrutationInformationsForm(): FormGroup {
-    return this.recrutationInformations;
-  }
-
   private extraInformations = new FormGroup({
     comments: new FormControl(null),
   });
-
-  public get extraInformationsForm(): FormGroup {
-    return this.extraInformations;
-  }
-
   private readonly form: FormGroup = new FormGroup({
     basicInformations: this.basicInformations,
     workOrganizationInformations: this.workOrganizationInformations,
     recrutationInformations: this.recrutationInformations,
     extraInformations: this.extraInformations,
   });
-
+  //form groups getters
+  public get basicInformationsForm(): FormGroup {
+    return this.basicInformations;
+  }
+  public get workOrganizationInformationsForm(): FormGroup {
+    return this.workOrganizationInformations;
+  }
+  public get recrutationInformationsForm(): FormGroup {
+    return this.recrutationInformations;
+  }
+  public get extraInformationsForm(): FormGroup {
+    return this.extraInformations;
+  }
   public get _form(): FormGroup {
     return this.form;
   }
@@ -143,8 +136,8 @@ export class AddRecrutationFormComponent {
       }
 
       this.openConfirmationDialog(tempControls);
-      this.bsModalRef.content.onClose.subscribe((res: boolean) => {
-        if (res) {
+      this.bsModalRef.content.onClose.subscribe((response: boolean) => {
+        if (response) {
           newRecrutationDto['recrutationExternalId'] = v4();
           this.apiService
             .sendPostRequest(newRecrutationDto)
