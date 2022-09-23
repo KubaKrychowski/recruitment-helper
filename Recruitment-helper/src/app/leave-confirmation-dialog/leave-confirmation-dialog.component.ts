@@ -13,12 +13,6 @@ export class LeaveConfirmationDialogComponent {
   openModalWithComponent() {
     const initialState: ModalOptions = {
       initialState: {
-        list: [
-          'Open a modal with component',
-          'Pass your data',
-          'Do something else',
-          '...'
-        ],
         title: 'Modal with component'
       }
     };
@@ -50,7 +44,6 @@ export class LeaveConfirmationDialogComponent {
 export class ModalContentComponent {
   title?: string;
   closeBtnName?: string;
-  list: any[] = [];
 
   constructor(public bsModalRef: BsModalRef) {}
 

@@ -198,11 +198,9 @@ export class AddRecrutationFormComponent {
   }
 
   setDateTime(date: Date, time: Date) {
-    console.log(date, time);
     date.setHours(time.getHours());
-    console.log(date);
     date.setMinutes(time.getMinutes());
-    console.log(date);
+
     return date;
   }
 }
