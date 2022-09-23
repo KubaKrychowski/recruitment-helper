@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 
+//! TODO: CREATE NEW COMPONENT FOR DIALOG HTML [IMPORTANT]
+
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-leave-confirmation-dialog-component',
   templateUrl: './leave-confirmation-dialog.component.html'
 })
