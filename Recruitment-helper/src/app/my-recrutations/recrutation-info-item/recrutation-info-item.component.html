@@ -1,4 +1,8 @@
-<div *ngIf="recrutation" (click)="openMoreInformationsDialog()" class="row d-flex border align-items-center mt-3 recru-pill">
+<div
+  *ngIf="recrutation"
+  (click)="openMoreInformationsDialog()"
+  class="row d-flex border align-items-center mt-3 recru-pill">
+
   <div class="col">
     {{recrutation.companyName}}
   </div>
@@ -8,10 +12,10 @@
   </ng-container>
 
   <ng-template #rangedSalary>
-   <div class="col">
-    <div class="row">
-      {{recrutation.minSalary}} PLN - {{recrutation.maxSalary}} PLN
-    </div>
+    <div class="col">
+      <div class="row">
+        {{recrutation.minSalary}} PLN - {{recrutation.maxSalary}} PLN
+      </div>
     </div>
   </ng-template>
 

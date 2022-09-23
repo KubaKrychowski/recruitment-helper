@@ -30,7 +30,8 @@ export class MyRecrutationsComponent implements OnInit {
         return;
       });
   }
-
+  
+  //TODO: Create errorHandlerService
   private errorHandler(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.log('An error occurred:', error.error);
