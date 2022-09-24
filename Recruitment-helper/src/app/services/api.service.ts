@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+const API_URL = environment.apiURL || 'Pass your url here';
+
 @Injectable({
   providedIn: 'root'
 })
-
-const API_URL = environment.apiURL || 'Pass your url here';
 
 export class ApiService {
 
