@@ -2,11 +2,11 @@
   <app-nav-bar></app-nav-bar>
   <section>
     <article>
-      <router-outlet>
-
-      </router-outlet>
-
+      <router-outlet></router-outlet>
     </article>
   </section>
 
+  <section class="notifications">
+    <app-notifications *ngIf="notification" [notification]="notification"></app-notifications>
+  </section>
 </main>

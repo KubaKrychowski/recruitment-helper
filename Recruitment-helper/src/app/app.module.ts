@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +20,9 @@ import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.compo
 import { RecrutationInfoItemComponent } from './my-recrutations/recrutation-info-item/recrutation-info-item.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { RecrutationInfoItemExtendedDialogComponent } from './my-recrutations/recrutation-info-item-extended-dialog/recrutation-info-item-extended-dialog.component';
+import { DictionaryService } from './shared/dictionary/dictionary.service';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { RecrutationInfoItemExtendedDialogComponent } from './my-recrutations/re
     MyRecrutationsComponent,
     RecrutationInfoItemComponent,
     LogInComponent,
-    RecrutationInfoItemExtendedDialogComponent
+    RecrutationInfoItemExtendedDialogComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,7 @@ import { RecrutationInfoItemExtendedDialogComponent } from './my-recrutations/re
     FormsModule,
     HttpClientModule
   ],
-  providers: [BsModalService, ApiService],
+  providers: [BsModalService, ApiService, DictionaryService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,5 @@
+import { NotificationStatusEnum, NotificationClassEnum } from './../shared/models/notification.model';
+import { NotificationService } from './../services/notification.service';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { catchError, tap, throwError } from 'rxjs';
@@ -10,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class MyRecrutationsComponent implements OnInit {
   recrutations: any = [];
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService,private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.getAllRecrutations();
@@ -30,11 +32,16 @@ export class MyRecrutationsComponent implements OnInit {
         return;
       });
   }
-  
+
   //TODO: Create errorHandlerService
   private errorHandler(error: HttpErrorResponse) {
     if (error.status === 0) {
-      console.log('An error occurred:', error.error);
+      const notification = {
+        title: error.message,
+        status: NotificationStatusEnum.Failed,
+        cssClass: NotificationClassEnum.Failed
+      }
+      this.notificationService.notificationsHandler.next(notification);
     } else {
       console.log(
         `Backend returned code ${error.status}, body was: `,

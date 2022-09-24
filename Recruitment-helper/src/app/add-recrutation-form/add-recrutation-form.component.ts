@@ -1,13 +1,16 @@
+import { DictionaryService } from './../shared/dictionary/dictionary.service';
 import { v4 } from 'uuid';
 import { ApiService } from './../services/api.service';
 import { ConfirmChangesDialogComponent } from './confirm-changes-dialog/confirm-changes-dialog.component';
 import { ExtranInformationCheckboxModel } from './../shared/models/extra-information-checkbox.model';
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationClassEnum, NotificationStatusEnum } from '../shared/models/notification.model';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-add-recrutation-form',
@@ -16,27 +19,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AddRecrutationFormComponent {
   public onloading: boolean = false;
-  // TODO: Create other file for holding definitions
-  public readonly extraCheckboxesArray: Array<ExtranInformationCheckboxModel> =
-    [
-      {
-        label: 'micro-services/micro-frontends',
-        formControlName: 'architecture',
-      },
-      {
-        label: 'exclusive',
-        formControlName: 'exclusive',
-      },
-      {
-        label: 'holiday',
-        formControlName: 'holiday',
-      },
-      {
-        label: 'is extra paid (if exclusive)',
-        formControlName: 'isExtraPaid',
-      },
-    ];
-    // form groups
+
+  //* Definitions for form controls
+  public workTypes: string[] = [];
+  public employmentTypes: string[] = [];
+  public extraCheckboxesArray: ExtranInformationCheckboxModel[] = [];
+
+  // form groups
   private basicInformations: FormGroup = new FormGroup({
     companyName: new FormControl(null, Validators.required),
     companyDescription: new FormControl(null),
@@ -87,8 +76,14 @@ export class AddRecrutationFormComponent {
     private bsModalRef: BsModalRef,
     private modalService: BsModalService,
     public router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private dictionaryService: DictionaryService,
+    private notificationService: NotificationService
   ) {
+    this.workTypes = this.dictionaryService._workTypes;
+    this.employmentTypes = this.dictionaryService._employmentTypes;
+    this.extraCheckboxesArray = this.dictionaryService._extraCheckboxesArray;
+
     for (
       let controlIndex = 0;
       controlIndex < this.extraCheckboxesArray.length;
@@ -156,7 +151,12 @@ export class AddRecrutationFormComponent {
         }
       });
     } else {
-      //TODO: add notification wrong data or smth like that
+      const notification = {
+        title: 'Form has got incorrect values',
+        status: NotificationStatusEnum.Failed,
+        cssClass: NotificationClassEnum.Failed
+      }
+      this.notificationService.notificationsHandler.next(notification);
     }
   }
 
@@ -178,7 +178,7 @@ export class AddRecrutationFormComponent {
 
   private errorHandler(error: HttpErrorResponse) {
     if (error.status === 0) {
-      console.log('An error occurred:', error.error);
+
     } else {
       console.log(
         `Backend returned code ${error.status}, body was: `,

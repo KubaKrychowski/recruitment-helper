@@ -1,0 +1,33 @@
+.container{
+  width: 30vw;
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.notification-content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 10%;
+  color: white;
+
+  .notification-title {
+    margin: 0;
+  }
+}
+
+.success {
+  background-color: #198754;
+}
+
+.warning {
+  background-color:rgb(250, 192, 32);
+}
+
+.danger{
+  background-color: rgb(247, 39, 39);
+}

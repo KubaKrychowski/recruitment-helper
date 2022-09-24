@@ -127,17 +127,9 @@
                 <option [value]="null" disabled selected>
                   Choose work type
                 </option>
-                <!-- TODO: Use *ngFor here and loop in scss class -->
-                <option value="hybrid">
-                  Hybrid
-                </option>
 
-                <option value="onSite">
-                  onsite
-                </option>
-
-                <option value="remote">
-                  Remote
+                <option *ngFor="let workType of workTypes" value="workType">
+                  {{ workType }}
                 </option>
               </select>
 
@@ -281,7 +273,7 @@
               </div>
 
               <div class="col-5">
-                <label class="form-label" for="max-salary"0>
+                <label class="form-label" for="max-salary">
                   Max. Salary
                 </label>
 
@@ -309,25 +301,15 @@
                 [class.border-danger]="
                   !recrutationInformationsForm.controls['employmentType'].valid &&
                   recrutationInformationsForm.controls['employmentType'].touched">
-                <!-- TODO: use *ngFor here -->
-                <option selected>
-                  Choose employment type
+                <option [value]="null" disabled selected>
+                    Choose employment type
                 </option>
 
-                <option value="1">
-                  employment contract
-                </option>
+                <option
+                  *ngFor="let employmentType of employmentTypes; index as employmentTypeIndex"
+                  [value]="employmentTypeIndex">
 
-                <option value="2">
-                  order contract
-                </option>
-
-                <option value="3">
-                  contract for performance of a specific task
-                </option>
-
-                <option value="4">
-                  B2B
+                  {{ employmentType }}
                 </option>
               </select>
 

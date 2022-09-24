@@ -1,0 +1,21 @@
+<section class="container {{ notification.cssClass }}">
+  <div class="notification-content">
+    <div [ngSwitch]="notification.status">
+      <div *ngSwitchCase="notificationStatusEnum.Success">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+
+      <div *ngSwitchCase="notificationStatusEnum.Failed">
+        <i class="bi bi-exclamation-octagon-fill"></i>
+      </div>
+
+      <div *ngSwitchCase="notificationStatusEnum.Warning">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+      </div>
+    </div>
+
+    <p class="notification-title">
+      {{ notification.title }}
+    </p>
+  </div>
+</section>
