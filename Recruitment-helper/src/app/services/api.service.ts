@@ -15,4 +15,8 @@ export class ApiService {
   sendGetRequest(url: string){
     return this.http.get(`https://localhost:44339/api/${url}`);
   }
+
+  sendLogInRequest(requestBody: any) {
+    return this.http.post('https://localhost:44339/api/LogIn', requestBody);
+  }
 }
