@@ -13,6 +13,8 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.notificationService.notificationsHandler.subscribe((notification) => {
+      console.log(notification);
+
       this.notification = notification;
 
       if (notification) {
@@ -32,3 +34,4 @@ export class AppComponent {
 //TODO: Add JWT authorizaton
 //TODO: Try to use ngRx for example to hold recrutations
 //TODO: Use local storage to hold apiKey
+//TODO: Find good way for error handling (best solution is to use RxJS)

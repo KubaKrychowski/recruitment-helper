@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './services/error-handler.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { NgModule } from '@angular/core';
@@ -49,7 +50,7 @@ import { NotificationService } from './services/notification.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BsModalService, ApiService, DictionaryService, NotificationService],
+  providers: [BsModalService, ApiService, DictionaryService, NotificationService,ErrorHandlerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

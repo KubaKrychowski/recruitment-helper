@@ -8,15 +8,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationClassEnum, NotificationStatusEnum } from '../shared/models/notification.model';
 import { NotificationService } from '../services/notification.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
 
 @Component({
   selector: 'app-add-recrutation-form',
   templateUrl: './add-recrutation-form.component.html',
   styleUrls: ['./add-recrutation-form.component.scss'],
 })
+
 export class AddRecrutationFormComponent {
   public onloading: boolean = false;
 
@@ -78,7 +79,8 @@ export class AddRecrutationFormComponent {
     public router: Router,
     private apiService: ApiService,
     private dictionaryService: DictionaryService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private errorHandlerService: ErrorHandlerService
   ) {
     this.workTypes = this.dictionaryService._workTypes;
     this.employmentTypes = this.dictionaryService._employmentTypes;
@@ -137,7 +139,7 @@ export class AddRecrutationFormComponent {
           this.apiService
             .sendPostRequest(newRecrutationDto)
             .pipe(
-              catchError(this.errorHandler),
+              catchError(this.errorHandlerService.errorHandler),
               tap((result) => {
                 console.log(result);
                 this.router.navigate(['/home']);
@@ -174,20 +176,6 @@ export class AddRecrutationFormComponent {
       initialState
     );
     this.bsModalRef.content.closeBtnName = 'Close';
-  }
-
-  private errorHandler(error: HttpErrorResponse) {
-    if (error.status === 0) {
-
-    } else {
-      console.log(
-        `Backend returned code ${error.status}, body was: `,
-        error.error
-      );
-    }
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
   }
 
   setDateTime(date: Date, time: Date) {

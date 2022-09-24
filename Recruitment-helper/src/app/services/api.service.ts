@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
+const API_URL = environment.apiURL || 'Pass your url here';
+
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  //TODO: Pass API URL by environment variables
   sendPostRequest(requestBody: any){
-    return this.http.post('https://localhost:44339/api/AddNewRecrutation', requestBody);
+    return this.http.post(`${API_URL}/AddNewRecrutation`, requestBody);
   }
 
   sendGetRequest(url: string){
-    return this.http.get(`https://localhost:44339/api/${url}`);
+    return this.http.get(`${API_URL}/${url}`);
   }
 
   sendLogInRequest(requestBody: any) {
-    return this.http.post('https://localhost:44339/api/LogIn', requestBody);
+    return this.http.post(`${API_URL}/LogIn`, requestBody);
   }
 }
