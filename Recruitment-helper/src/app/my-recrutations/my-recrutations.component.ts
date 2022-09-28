@@ -22,11 +22,17 @@ export class MyRecrutationsComponent implements OnInit {
 
   private getAllRecrutations(): void {
     this.apiService
-      .sendGetRequest('GetRecrutationsList')
+      .sendGetRequest('recrutations')
       .pipe(
         catchError(this.errorHandlerService.errorHandler),
         tap((result) => {
-          this.recrutations = result;
+          for (const [key, value] of Object.entries(result)) {
+            for (const [_key, _value] of Object.entries(value)) {
+              console.log(_value);
+              this.recrutations.push(_value);
+            }
+          }
+          console.log(this.recrutations);
         })
       )
       .subscribe(() => {

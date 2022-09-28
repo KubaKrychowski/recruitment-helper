@@ -11,12 +11,12 @@ const API_URL = environment.apiURL || 'Pass your url here';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  sendPostRequest(requestBody: any){
-    return this.http.post(`${API_URL}/AddNewRecrutation`, requestBody);
+  sendPostRequest(url: string,requestBody: any){
+    return this.http.post(`${API_URL}${url}`, requestBody);
   }
 
   sendGetRequest(url: string){
-    return this.http.get(`${API_URL}/${url}`);
+    return this.http.get(`${API_URL}${url}`);
   }
 
   sendLogInRequest(requestBody: any) {

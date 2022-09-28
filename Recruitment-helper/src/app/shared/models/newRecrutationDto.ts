@@ -1,5 +1,5 @@
 export interface NewRecrutationDto {
-  recrutationExternalId: string;
+  externalId: string;
   companyName: string;
   companyDescription?: string;
   position: string;

@@ -20,7 +20,7 @@ export class AppComponent {
       if (notification) {
         setTimeout(() => {
           this.resetNotification();
-        }, 2000);
+        }, 2500);
       }
     });
   }

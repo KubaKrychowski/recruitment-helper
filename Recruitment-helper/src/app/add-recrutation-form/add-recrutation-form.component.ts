@@ -8,7 +8,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
-import { NotificationClassEnum, NotificationStatusEnum } from '../shared/models/notification.model';
+import {
+  NotificationClassEnum,
+  NotificationStatusEnum,
+} from '../shared/models/notification.model';
 import { NotificationService } from '../services/notification.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
 
@@ -17,7 +20,6 @@ import { ErrorHandlerService } from '../services/error-handler.service';
   templateUrl: './add-recrutation-form.component.html',
   styleUrls: ['./add-recrutation-form.component.scss'],
 })
-
 export class AddRecrutationFormComponent {
   public onloading: boolean = false;
 
@@ -135,13 +137,19 @@ export class AddRecrutationFormComponent {
       this.openConfirmationDialog(tempControls);
       this.bsModalRef.content.onClose.subscribe((response: boolean) => {
         if (response) {
-          newRecrutationDto['recrutationExternalId'] = v4();
+          newRecrutationDto['externalId'] = v4();
           this.apiService
-            .sendPostRequest(newRecrutationDto)
+            .sendPostRequest('recrutations', newRecrutationDto)
             .pipe(
               catchError(this.errorHandlerService.errorHandler),
-              tap((result) => {
-                console.log(result);
+              tap(() => {
+                const result = {
+                  title: 'Recrutation successfully created',
+                  status: NotificationStatusEnum.Success,
+                  cssClass: NotificationClassEnum.Success,
+                };
+
+                this.notificationService.notificationsHandler.next(result);
                 this.router.navigate(['/home']);
               })
             )
@@ -156,8 +164,8 @@ export class AddRecrutationFormComponent {
       const notification = {
         title: 'Form has got incorrect values',
         status: NotificationStatusEnum.Failed,
-        cssClass: NotificationClassEnum.Failed
-      }
+        cssClass: NotificationClassEnum.Failed,
+      };
       this.notificationService.notificationsHandler.next(notification);
     }
   }
