@@ -34,13 +34,14 @@ export class LogInComponent implements OnInit {
     if (this.loginForm.valid) {
       this.apiService
         .sendLogInRequest({
-          login: this.loginForm.controls['login'].value,
+          email: this.loginForm.controls['email'].value,
           password: this.loginForm.controls['password'].value,
         })
         .pipe(
           //! catchError(this.errorHandler),
           tap((result) => {
             if (result) {
+              this.apiService.token = result;
               this.location.back();
             }
           })
