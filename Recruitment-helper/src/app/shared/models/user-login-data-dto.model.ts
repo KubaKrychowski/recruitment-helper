@@ -1,4 +1,4 @@
-export interface UserRegisterDataDtoModel {
+export interface UserLoginDataDtoModel {
   email: string;
   password: string;
 }

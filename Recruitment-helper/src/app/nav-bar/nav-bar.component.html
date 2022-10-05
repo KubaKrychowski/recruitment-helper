@@ -57,11 +57,23 @@
 
           <li class="d-flex">
             <button
+            *ngIf="!isUserAuthenticated"
               routerLink="log-in"
               type="button"
               class="btn btn-outline-light me-2 login-button">
 
               Login
+            </button>
+          </li>
+
+          <li class="d-flex">
+            <button
+            *ngIf="!isUserAuthenticated"
+              routerLink="register"
+              type="button"
+              class="btn btn-warning me-2 register-button">
+
+              Sign up
             </button>
           </li>
         </ul>

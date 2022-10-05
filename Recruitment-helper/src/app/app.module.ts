@@ -24,6 +24,7 @@ import { RecrutationInfoItemExtendedDialogComponent } from './my-recrutations/re
 import { DictionaryService } from './shared/dictionary/dictionary.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationService } from './services/notification.service';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NotificationService } from './services/notification.service';
     LogInComponent,
     RecrutationInfoItemExtendedDialogComponent,
     NotificationsComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

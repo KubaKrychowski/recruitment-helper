@@ -1,5 +1,6 @@
 export interface UserRegisterDataDtoModel {
   email: string;
-  login: string;
   password: string;
+  login: string;
+  token?: string;
 }

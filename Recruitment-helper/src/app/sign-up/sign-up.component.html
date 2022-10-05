@@ -1,11 +1,11 @@
 <section class="form-signin w-25 m-auto">
-  <form (ngSubmit)="identityUser()" [formGroup]="loginForm">
+  <form (ngSubmit)="onSubmitForm()" [formGroup]="registerForm">
     <img
       class="mt-5 mb-4 mx-auto d-block"
       src="../../assets/logos/recruitment-helper-auth-logo.png"
     />
 
-    <h1 class="h3 mt-5 mb-2 fw-normal">Please sign in</h1>
+    <h1 class="h3 mt-5 mb-2 fw-normal">Please sign up</h1>
 
     <div class="form-floating">
       <input
@@ -24,7 +24,7 @@
         type="text"
         class="form-control"
         id="floatingInput"
-        placeholder="user1234"/>
+        placeholder="User1234"/>
 
       <label for="floatingInput"> Login </label>
     </div>
@@ -46,7 +46,7 @@
         type="password"
         class="form-control"
         id="floatingPassword"
-        placeholder="Password"/>
+        placeholder="Confirm password"/>
 
       <label for="floatingPassword"> Confirm password </label>
     </div>

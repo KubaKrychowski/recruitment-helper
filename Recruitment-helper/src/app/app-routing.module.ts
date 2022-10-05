@@ -1,3 +1,4 @@
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'add-new-recrutation', component: AddRecrutationFormComponent },
   { path: 'my-recrutations', component: MyRecrutationsComponent },
   { path: 'log-in', component: LogInComponent },
+  { path: 'register', component: SignUpComponent },
 ];
 
 @NgModule({
