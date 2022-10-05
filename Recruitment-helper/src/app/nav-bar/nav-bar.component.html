@@ -55,6 +55,12 @@
             </a>
           </li>
 
+          <li *ngIf="isUserAuthenticated && username" class="d-flex">
+            <div class="user-info">
+              Welcome: {{ username }}
+            </div>
+          </li>
+
           <li class="d-flex">
             <button
             *ngIf="!isUserAuthenticated"

@@ -1,8 +1,11 @@
+import { SimplifiedUserDataModel } from './../shared/models/simplified-user-data';
+import { UserService } from './user.service';
 import { UserLoginDataDtoModel } from './../shared/models/user-login-data-dto.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserRegisterDataDtoModel } from '../shared/models/user-register-data-dto.model';
+import { Subject } from 'rxjs';
 
 const API_URL = environment.apiURL || 'Pass your url here';
 
@@ -11,6 +14,7 @@ const API_URL = environment.apiURL || 'Pass your url here';
 })
 export class ApiService {
   token: string | null = null;
+  username: Subject<string> = new Subject<string>();
 
   public get isUserAuthenticated(): boolean {
     return !!this.token;
@@ -24,7 +28,6 @@ export class ApiService {
   sendGetRequest(url: string) {
     let headers = null;
     new HttpHeaders();
-    console.log(this.token);
 
     if (this.token) {
       headers = new HttpHeaders().set('token', this.token);
@@ -40,10 +43,13 @@ export class ApiService {
   }
 
   sendRegisterRequest(requestBody: UserRegisterDataDtoModel) {
-    return this.http.post<UserRegisterDataDtoModel>(`${API_URL}idp/register`, requestBody);
+    return this.http.post<UserRegisterDataDtoModel>(
+      `${API_URL}idp/register`,
+      requestBody
+    );
   }
 
   sendLogInRequest(requestBody: UserLoginDataDtoModel) {
-    return this.http.post<string>(`${API_URL}idp/login`, requestBody);
+    return this.http.post<SimplifiedUserDataModel>(`${API_URL}idp/login`, requestBody);
   }
 }

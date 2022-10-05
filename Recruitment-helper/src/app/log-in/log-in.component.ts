@@ -1,10 +1,14 @@
-import { NotificationStatusEnum, NotificationClassEnum } from './../shared/models/notification.model';
+import {
+  NotificationStatusEnum,
+  NotificationClassEnum,
+} from './../shared/models/notification.model';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, tap } from 'rxjs';
 import { Location } from '@angular/common';
 import { NotificationService } from '../services/notification.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-log-in',
@@ -23,7 +27,8 @@ export class LogInComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private location: Location,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {}
@@ -39,11 +44,10 @@ export class LogInComponent implements OnInit {
         })
         .pipe(
           //! catchError(this.errorHandler),
-          tap((result) => {
-            if (result) {
-              this.apiService.token = result;
-              this.location.back();
-            }
+          tap((userDto) => {
+              this.apiService.token = userDto.token;
+              this.userService.currentUser.next(userDto);
+            this.location.back();
           })
         )
         .subscribe(() => {
@@ -53,10 +57,10 @@ export class LogInComponent implements OnInit {
       const notification = {
         title: 'Wrong login or password',
         status: NotificationStatusEnum.Failed,
-        cssClass: NotificationClassEnum.Failed
-      }
+        cssClass: NotificationClassEnum.Failed,
+      };
       this.loginForm.reset();
-      this.notificationService.notificationsHandler.next(notification)
+      this.notificationService.notificationsHandler.next(notification);
     }
   }
 }

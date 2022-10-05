@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
@@ -52,7 +53,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BsModalService, ApiService, DictionaryService, NotificationService,ErrorHandlerService],
+  providers: [BsModalService, ApiService, DictionaryService, NotificationService,ErrorHandlerService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
