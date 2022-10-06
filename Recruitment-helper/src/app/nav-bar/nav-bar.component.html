@@ -82,6 +82,18 @@
               Sign up
             </button>
           </li>
+
+          <li class="d-flex sign-out-button">
+            <button
+            *ngIf="isUserAuthenticated"
+              (click)="onSignOut()"
+              type="button"
+              class="btn btn-outline-light me-2 login-button">
+
+              Sign out
+            </button>
+          </li>
+
         </ul>
       </div>
     </div>
