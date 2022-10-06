@@ -1,3 +1,5 @@
+import { UserService } from './services/user.service';
+import { ApiService } from './services/api.service';
 import { NotificationModel } from './shared/models/notification.model';
 import { Component } from '@angular/core';
 import { NotificationService } from './services/notification.service';
@@ -9,12 +11,21 @@ import { NotificationService } from './services/notification.service';
 })
 export class AppComponent {
   notification: NotificationModel | null = null;
-  constructor(private notificationService: NotificationService) {}
+  constructor(private notificationService: NotificationService,private apiService: ApiService, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.notificationService.notificationsHandler.subscribe((notification) => {
-      console.log(notification);
+    this.setupNotificationService();
+    if(localStorage.getItem('token')){
+      this.autoLogin();
+    }
+  }
 
+  private resetNotification(): void {
+    this.notificationService.notificationsHandler.next(null);
+  }
+
+  private setupNotificationService(): void {
+    this.notificationService.notificationsHandler.subscribe((notification) => {
       this.notification = notification;
 
       if (notification) {
@@ -25,13 +36,16 @@ export class AppComponent {
     });
   }
 
-  private resetNotification(): void {
-    this.notificationService.notificationsHandler.next(null);
+  private autoLogin(): void {
+    this.apiService.checkAndRefreshJWT(localStorage.getItem('token')!).subscribe(userDto => {
+      if(userDto){
+        this.userService.currentUser.next(userDto);
+        this.apiService.token = userDto.token;
+      }
+    })
   }
 }
 
 //TODO: Add guards
-//TODO: Add JWT authorizaton
 //TODO: Try to use ngRx for example to hold recrutations
-//TODO: Use local storage to hold apiKey
 //TODO: Find good way for error handling (best solution is to use RxJS)

@@ -52,4 +52,8 @@ export class ApiService {
   sendLogInRequest(requestBody: UserLoginDataDtoModel) {
     return this.http.post<SimplifiedUserDataModel>(`${API_URL}idp/login`, requestBody);
   }
+
+  checkAndRefreshJWT(token: string){
+    return this.http.get<SimplifiedUserDataModel>(`${API_URL}idp/login/${token}`);
+  }
 }

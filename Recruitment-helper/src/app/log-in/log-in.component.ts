@@ -46,6 +46,7 @@ export class LogInComponent implements OnInit {
           //! catchError(this.errorHandler),
           tap((userDto) => {
               this.apiService.token = userDto.token;
+              localStorage.setItem('token', userDto.token);
               this.userService.currentUser.next(userDto);
             this.location.back();
           })
