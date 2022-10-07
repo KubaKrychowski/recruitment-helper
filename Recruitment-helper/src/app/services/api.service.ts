@@ -54,6 +54,6 @@ export class ApiService {
   }
 
   checkAndRefreshJWT(token: string){
-    return this.http.get<SimplifiedUserDataModel>(`${API_URL}idp/login/${token}`);
+    return this.http.get<any>(`${API_URL}idp/login/${token}`);
   }
 }

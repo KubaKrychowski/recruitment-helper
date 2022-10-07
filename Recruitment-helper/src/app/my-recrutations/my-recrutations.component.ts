@@ -28,11 +28,9 @@ export class MyRecrutationsComponent implements OnInit {
         tap((result) => {
           for (const [key, value] of Object.entries(result)) {
             for (const [_key, _value] of Object.entries(value)) {
-              console.log(_value);
               this.recrutations.push(_value);
             }
           }
-          console.log(this.recrutations);
         })
       )
       .subscribe(() => {

@@ -1,6 +1,10 @@
 import { UserService } from './services/user.service';
 import { ApiService } from './services/api.service';
-import { NotificationModel } from './shared/models/notification.model';
+import {
+  NotificationClassEnum,
+  NotificationModel,
+  NotificationStatusEnum,
+} from './shared/models/notification.model';
 import { Component } from '@angular/core';
 import { NotificationService } from './services/notification.service';
 
@@ -11,11 +15,16 @@ import { NotificationService } from './services/notification.service';
 })
 export class AppComponent {
   notification: NotificationModel | null = null;
-  constructor(private notificationService: NotificationService,private apiService: ApiService, private userService: UserService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private apiService: ApiService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.setupNotificationService();
-    if(localStorage.getItem('token')){
+
+    if (localStorage.getItem('token')) {
       this.autoLogin();
     }
   }
@@ -37,15 +46,43 @@ export class AppComponent {
   }
 
   private autoLogin(): void {
-    this.apiService.checkAndRefreshJWT(localStorage.getItem('token')!).subscribe(userDto => {
-      if(userDto){
-        this.userService.currentUser.next(userDto);
-        this.apiService.token = userDto.token;
-      }
-    })
+    this.apiService
+      .checkAndRefreshJWT(localStorage.getItem('token')!)
+      .pipe()
+      .subscribe((userDto) => {
+        if (userDto.error) {
+          const notification = {
+            title: 'Authorization token has expired, please login again',
+            status: NotificationStatusEnum.Warning,
+            cssClass: NotificationClassEnum.Warning,
+          };
+          this.notificationService.notificationsHandler.next(notification);
+        }
+        if (userDto.token) {
+          this.userService.currentUser.next(userDto);
+          this.apiService.token = userDto.token;
+        }
+      });
   }
 }
 
+// .pipe(
+//   catchError(this.errorHandlerService.errorHandler),
+//   tap(() => {
+//     const result = {
+//       title: 'Recrutation successfully created',
+//       status: NotificationStatusEnum.Success,
+//       cssClass: NotificationClassEnum.Success,
+//     };
+
+//     this.notificationService.notificationsHandler.next(result);
+//     this.router.navigate(['/home']);
+//   })
+// )
+// .subscribe(() => {
+//   return;
+// });
+//!: TODO: Create response model
 //TODO: Add guards
 //TODO: Try to use ngRx for example to hold recrutations
 //TODO: Find good way for error handling (best solution is to use RxJS)
