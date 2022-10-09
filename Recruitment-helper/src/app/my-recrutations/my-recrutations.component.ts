@@ -1,8 +1,7 @@
 import { ErrorHandlerService } from './../services/error-handler.service';
-import { NotificationService } from './../services/notification.service';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, tap, } from 'rxjs';
 
 @Component({
   selector: 'app-my-recrutations',

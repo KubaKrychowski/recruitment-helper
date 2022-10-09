@@ -1,3 +1,4 @@
+import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -8,9 +9,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class RecrutationInfoItemExtendedDialogComponent implements OnInit {
   modalRef?: BsModalRef;
+  public recrutationInfo: any;
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

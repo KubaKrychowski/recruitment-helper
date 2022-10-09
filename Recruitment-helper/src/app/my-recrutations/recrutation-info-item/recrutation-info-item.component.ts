@@ -17,5 +17,6 @@ export class RecrutationInfoItemComponent implements OnInit {
 
   public openMoreInformationsDialog(): void {
     this.modalRef = this.modalService.show(RecrutationInfoItemExtendedDialogComponent);
+    this.modalRef.content.recrutationInfo = this.recrutation;
   }
 }
