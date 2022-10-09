@@ -12,4 +12,40 @@
     <h5>
       {{ recrutationInfo.position }}
     </h5>
+
+    <div class="details">
+      <div class="row">
+        <div>
+          <span class="label">
+            Company description:
+          </span>
+
+          <span class="row-data">
+            {{ recrutationInfo.companyDescription }}
+          </span>
+        </div>
+
+        <div>
+          <span>
+            website:
+          </span>
+
+          <span>
+          <a target="_blank" href="{{ recrutationInfo.websiteUrl }}">
+            {{ recrutationInfo.websiteUrl }}
+          </a>
+          </span>
+        </div>
+
+        <div>
+          <span>
+            Work type:
+          </span>
+
+          <span>
+            {{ recrutationInfo.workType }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
