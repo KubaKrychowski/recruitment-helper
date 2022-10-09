@@ -66,23 +66,6 @@ export class AppComponent {
   }
 }
 
-// .pipe(
-//   catchError(this.errorHandlerService.errorHandler),
-//   tap(() => {
-//     const result = {
-//       title: 'Recrutation successfully created',
-//       status: NotificationStatusEnum.Success,
-//       cssClass: NotificationClassEnum.Success,
-//     };
-
-//     this.notificationService.notificationsHandler.next(result);
-//     this.router.navigate(['/home']);
-//   })
-// )
-// .subscribe(() => {
-//   return;
-// });
 //!: TODO: Create response model
-//TODO: Add guards
 //TODO: Try to use ngRx for example to hold recrutations
-//TODO: Find good way for error handling (best solution is to use RxJS)
+
