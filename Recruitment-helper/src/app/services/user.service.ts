@@ -10,8 +10,14 @@ import { Router } from '@angular/router';
 export class UserService {
   public currentUser: Subject<SimplifiedUserDataModel | null> =
     new Subject<SimplifiedUserDataModel | null>();
-
-  constructor(private apiService: ApiService,private router: Router) {}
+  public isUserLoggedIn: boolean = false;
+  constructor(private apiService: ApiService,private router: Router) {
+    this.currentUser.subscribe(user => {
+      if(user?.externalId){
+        this.isUserLoggedIn = true;
+      }
+    });
+  }
 
   public signOut(): void {
     this.apiService.token = null;
