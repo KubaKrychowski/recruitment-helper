@@ -1,7 +1,7 @@
 import { DictionaryService } from './../../shared/dictionary/dictionary.service';
 import { NewRecrutationDto } from './../../shared/models/newRecrutationDto';
 import { AfterViewInit, Component } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { RecrutationService } from 'src/app/services/recrutation.service';
 
 @Component({

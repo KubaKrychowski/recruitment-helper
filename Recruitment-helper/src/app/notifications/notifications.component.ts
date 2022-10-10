@@ -1,4 +1,4 @@
-import { NotificationStatusEnum, NotificationClassEnum } from './../shared/models/notification.model';
+import { NotificationStatusEnum } from './../shared/models/notification.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { NotificationModel } from '../shared/models/notification.model';
 

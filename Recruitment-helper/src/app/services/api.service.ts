@@ -1,5 +1,4 @@
 import { SimplifiedUserDataModel } from './../shared/models/simplified-user-data';
-import { UserService } from './user.service';
 import { UserLoginDataDtoModel } from './../shared/models/user-login-data-dto.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

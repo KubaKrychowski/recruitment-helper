@@ -8,14 +8,12 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { catchError, tap, throwError } from 'rxjs';
 import {
   NotificationClassEnum,
   NotificationStatusEnum,
 } from '../shared/models/notification.model';
 import { NotificationService } from '../services/notification.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-add-recrutation-form',
@@ -141,7 +139,8 @@ export class AddRecrutationFormComponent {
       this.bsModalRef.content.onClose.subscribe((response: boolean) => {
         if (response) {
           newRecrutationDto['externalId'] = v4();
-          newRecrutationDto['userExternalId'] = localStorage.getItem('userExternalId');
+          newRecrutationDto['userExternalId'] =
+            localStorage.getItem('userExternalId');
           this.recrutationService.addNewRecrutation(newRecrutationDto);
         } else {
           return;

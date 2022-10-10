@@ -1,7 +1,4 @@
-import { ErrorHandlerService } from './../services/error-handler.service';
-import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
-import { catchError, tap } from 'rxjs';
 import { RecrutationService } from '../services/recrutation.service';
 
 @Component({

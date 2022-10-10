@@ -5,7 +5,7 @@ import {
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { Location } from '@angular/common';
 import { NotificationService } from '../services/notification.service';
 import { UserService } from '../services/user.service';
