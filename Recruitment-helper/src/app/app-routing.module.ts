@@ -10,8 +10,16 @@ import { MyRecrutationsComponent } from './my-recrutations/my-recrutations.compo
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
-  { path: 'add-new-recrutation', component: AddRecrutationFormComponent,canActivate: [AuthGuard] },
-  { path: 'my-recrutations', component: MyRecrutationsComponent,canActivate: [AuthGuard] },
+  {
+    path: 'add-new-recrutation',
+    component: AddRecrutationFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'my-recrutations',
+    component: MyRecrutationsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'log-in', component: LogInComponent },
   { path: 'register', component: SignUpComponent },
 ];

@@ -15,6 +15,8 @@ export class UserService {
     this.currentUser.subscribe(user => {
       if(user?.externalId){
         this.isUserLoggedIn = true;
+      } else {
+        this.isUserLoggedIn = false;
       }
     });
   }
