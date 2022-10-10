@@ -1,61 +1,116 @@
-<div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div *ngIf="recrutationInfo" class="modal-body">
-    <h4>
+<div class="menu-icon">
+  <i (click)="toggleMenu()" class="bi bi-three-dots-vertical"></i>
+</div>
+<div *ngIf="isMenuExpanded" class="menu">
+  <ul class="menu-list">
+    <li (click)="closeRecrutation()" class="menu-list-item">
+      Close recrutation
+    </li>
+
+    <li class="menu-list-item">
+      Edit
+    </li>
+  </ul>
+</div>
+<div *ngIf="recrutationInfo" class="modal-body">
+  <div class="recrutation-header">
+    <h4 class="company-name">
       {{ recrutationInfo.companyName }}
     </h4>
 
-    <h5>
-      {{ recrutationInfo.position }}
-    </h5>
+    <h6 class="recrutation-salary">
+      <strong>Salary: </strong> {{ recrutationInfo.minSalary }}PLN -
+      {{ recrutationInfo.maxSalary }}PLN
 
-    <div class="details">
-      <div class="row">
-        <div>
-          <span class="label">
-            Company description:
-          </span>
+      <br />
 
-          <span class="row-data">
-            {{ recrutationInfo.companyDescription }}
-          </span>
-        </div>
+      <strong>Id:</strong> {{ recrutationInfo.externalId }}
+    </h6>
+  </div>
 
-        <div>
-          <span>
-            website:
-          </span>
+  <h6 class="position">
+    {{ recrutationInfo.position }}
+  </h6>
 
-          <span>
+  <hr />
+
+  <div class="details">
+    <div class="col">
+      <div class="col">
+        <p class="label">Company description:</p>
+
+        <span class="row-data">
+          {{ recrutationInfo.companyDescription }}
+        </span>
+      </div>
+
+      <div class="col">
+        <p class="label">website:</p>
+
+        <span class="row-data">
           <a target="_blank" href="{{ recrutationInfo.websiteUrl }}">
             {{ recrutationInfo.websiteUrl }}
           </a>
-          </span>
-        </div>
+        </span>
+      </div>
 
-        <div>
-          <span>
-            Work type:
-          </span>
+      <div class="col">
+        <p class="label">Recruiters' name</p>
 
-          <span>
-            {{ recrutationInfo.workType }}
-          </span>
-        </div>
+        <span class="row-data">
+          {{ recrutationInfo.recruitersName }}
+        </span>
+      </div>
 
-        <div>
-          <span>
-            Employment type:
-          </span>
+      <div class="col">
+        <p class="label">Recrutation language</p>
 
-          <span>
-            {{ recrutationInfo.employmentType }}
-          </span>
+        <span class="row-data">
+          {{ recrutationInfo.recrutationLanguage }}
+        </span>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="col">
+        <p class="label">Work type:</p>
+
+        <span class="row-data">
+          {{ recrutationInfo.workType }}
+        </span>
+      </div>
+
+      <div class="col">
+        <p class="label">Employment type:</p>
+
+        <span class="row-data">
+          {{ recrutationInfo.employmentType }}
+        </span>
+      </div>
+
+      <div class="col">
+        <p class="label">Work language</p>
+
+        <span class="row-data">
+          {{ recrutationInfo.workLanguage }}
+        </span>
+      </div>
+
+      <div class="col">
+        <p class="label">Meeting date and time</p>
+
+        <div class="row-data">
+          {{ recrutationInfo.meetingDateAndHour | date: "medium" }}
         </div>
       </div>
     </div>
   </div>
+
+  <div>
+    <p class="label">Comments:</p>
+
+    <span class="row-data">
+      {{ recrutationInfo.comments }}
+    </span>
+  </div>
+</div>

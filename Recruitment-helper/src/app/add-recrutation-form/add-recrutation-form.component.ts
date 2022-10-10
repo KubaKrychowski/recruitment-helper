@@ -140,7 +140,6 @@ export class AddRecrutationFormComponent {
         if (response) {
           newRecrutationDto['externalId'] = v4();
           newRecrutationDto['userExternalId'] = localStorage.getItem('userExternalId');
-          console.log(newRecrutationDto);
           this.apiService
             .sendPostRequest('recrutations', newRecrutationDto)
             .pipe(

@@ -26,6 +26,7 @@ import { DictionaryService } from './shared/dictionary/dictionary.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationService } from './services/notification.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { RecrutationService } from './services/recrutation.service';
 
 @NgModule({
   declarations: [
@@ -51,9 +52,17 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     TimepickerModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [BsModalService, ApiService, DictionaryService, NotificationService,ErrorHandlerService, UserService],
-  bootstrap: [AppComponent]
+  providers: [
+    BsModalService,
+    ApiService,
+    DictionaryService,
+    NotificationService,
+    ErrorHandlerService,
+    UserService,
+    RecrutationService
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

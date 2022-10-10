@@ -2,6 +2,7 @@ import { ErrorHandlerService } from './../services/error-handler.service';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { catchError, tap } from 'rxjs';
+import { RecrutationService } from '../services/recrutation.service';
 
 @Component({
   selector: 'app-my-recrutations',
@@ -11,29 +12,14 @@ import { catchError, tap } from 'rxjs';
 export class MyRecrutationsComponent implements OnInit {
   recrutations: any = [];
   constructor(
-    private apiService: ApiService,
-    private errorHandlerService: ErrorHandlerService
-  ) {}
-
-  ngOnInit(): void {
-    this.getAllRecrutations();
+    public recrutationService: RecrutationService
+  ) {
+    this.recrutationService.refreshListing();
   }
 
-  private getAllRecrutations(): void {
-    this.apiService
-      .sendGetRequest(`recrutations/${localStorage.getItem('userExternalId')}`)
-      .pipe(
-        catchError(this.errorHandlerService.errorHandler),
-        tap((result) => {
-          for (const [key, value] of Object.entries(result)) {
-            for (const [_key, _value] of Object.entries(value)) {
-              this.recrutations.push(_value);
-            }
-          }
-        })
-      )
-      .subscribe(() => {
-        return;
-      });
+  ngOnInit(): void {
+    this.recrutationService.refreshListingHandler.subscribe(() => {
+      this.recrutationService.refreshListing();
+    })
   }
 }

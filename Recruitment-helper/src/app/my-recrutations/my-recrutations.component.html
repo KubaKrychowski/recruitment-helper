@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="row" *ngFor="let recrutation of recrutations">
+      <div class="row" *ngFor="let recrutation of recrutationService.recrutations | async">
         <app-recrutation-info-item [recrutation]="recrutation"></app-recrutation-info-item>
       </div>
     </div>

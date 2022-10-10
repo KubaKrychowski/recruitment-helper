@@ -1,0 +1,67 @@
+p {
+  margin: 0;
+}
+
+.col{
+  margin-bottom: 1em;
+}
+
+.company-name {
+  font-weight: 500 !important;
+}
+
+.position {
+  font-weight: 200;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+}
+
+.label {
+  font-weight: 400;
+}
+
+.recrutation-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-icon{
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  z-index: 2;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.menu {
+  position: absolute;
+	z-index: 3;
+	background-color: rgb(235, 235, 235);
+	right: 0;
+	border-radius: 8px;
+	padding: 0.5em;
+	top: 2em;
+}
+
+.menu-list{
+  padding: 0;
+  list-style: none;
+
+  .menu-list-item {
+    border-bottom: 1px solid #c8c8c8;
+    margin-bottom: 0.4em;
+
+    &:hover{
+    	background-color: rgb(219, 219, 219);
+      cursor: pointer;
+    }
+  }
+}
