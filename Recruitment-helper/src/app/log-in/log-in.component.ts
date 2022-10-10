@@ -47,6 +47,7 @@ export class LogInComponent implements OnInit {
           tap((userDto) => {
               this.apiService.token = userDto.token;
               localStorage.setItem('token', userDto.token);
+              localStorage.setItem('userExternalId', userDto.externalId);
               this.userService.currentUser.next(userDto);
             this.location.back();
           })

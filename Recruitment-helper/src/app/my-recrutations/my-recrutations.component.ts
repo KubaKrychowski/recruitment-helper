@@ -1,7 +1,7 @@
 import { ErrorHandlerService } from './../services/error-handler.service';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
-import { catchError, tap, } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-my-recrutations',
@@ -21,7 +21,7 @@ export class MyRecrutationsComponent implements OnInit {
 
   private getAllRecrutations(): void {
     this.apiService
-      .sendGetRequest('recrutations')
+      .sendGetRequest(`recrutations/${localStorage.getItem('userExternalId')}`)
       .pipe(
         catchError(this.errorHandlerService.errorHandler),
         tap((result) => {

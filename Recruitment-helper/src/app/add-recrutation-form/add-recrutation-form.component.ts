@@ -14,6 +14,7 @@ import {
 } from '../shared/models/notification.model';
 import { NotificationService } from '../services/notification.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-add-recrutation-form',
@@ -82,7 +83,7 @@ export class AddRecrutationFormComponent {
     private apiService: ApiService,
     private dictionaryService: DictionaryService,
     private notificationService: NotificationService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
   ) {
     this.workTypes = this.dictionaryService._workTypes;
     this.employmentTypes = this.dictionaryService._employmentTypes;
@@ -138,6 +139,8 @@ export class AddRecrutationFormComponent {
       this.bsModalRef.content.onClose.subscribe((response: boolean) => {
         if (response) {
           newRecrutationDto['externalId'] = v4();
+          newRecrutationDto['userExternalId'] = localStorage.getItem('userExternalId');
+          console.log(newRecrutationDto);
           this.apiService
             .sendPostRequest('recrutations', newRecrutationDto)
             .pipe(

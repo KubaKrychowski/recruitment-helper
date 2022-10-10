@@ -128,7 +128,7 @@
                   Choose work type
                 </option>
 
-                <option *ngFor="let workType of workTypes" value="workType">
+                <option *ngFor="let workType of workTypes" [value]="workType">
                   {{ workType }}
                 </option>
               </select>
@@ -356,6 +356,7 @@
               <textarea
                 id="comments"
                 class="form-control"
+                formControlName="comments"
                 placeholder="Say something unincluded in form...">
               </textarea>
             </form>
