@@ -1,7 +1,11 @@
+import { NotificationService } from './notification.service';
+import { NewRecrutationDto } from './../shared/models/newRecrutationDto';
 import { ErrorHandlerService } from './error-handler.service';
 import { catchError, Subject, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
+import { NotificationClassEnum, NotificationStatusEnum } from '../shared/models/notification.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +16,9 @@ export class RecrutationService {
 
   constructor(
     private apiService: ApiService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   closeRecrutation(externalId: string) {
@@ -42,5 +48,26 @@ export class RecrutationService {
       .subscribe(() => {
         return;
       });
+  }
+
+  addNewRecrutation(newRecrutationDto: NewRecrutationDto): void {
+    this.apiService
+    .sendPostRequest('recrutations', newRecrutationDto)
+    .pipe(
+      catchError(this.errorHandlerService.errorHandler),
+      tap(() => {
+        const result = {
+          title: 'Recrutation successfully created',
+          status: NotificationStatusEnum.Success,
+          cssClass: NotificationClassEnum.Success,
+        };
+
+        this.notificationService.notificationsHandler.next(result);
+        this.router.navigate(['/home']);
+      })
+    )
+    .subscribe(() => {
+      return;
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { RecrutationService } from 'src/app/services/recrutation.service';
 import { DictionaryService } from './../shared/dictionary/dictionary.service';
 import { v4 } from 'uuid';
 import { ApiService } from './../services/api.service';
@@ -84,6 +85,7 @@ export class AddRecrutationFormComponent {
     private dictionaryService: DictionaryService,
     private notificationService: NotificationService,
     private errorHandlerService: ErrorHandlerService,
+    private recrutationService: RecrutationService
   ) {
     this.workTypes = this.dictionaryService._workTypes;
     this.employmentTypes = this.dictionaryService._employmentTypes;
@@ -140,24 +142,7 @@ export class AddRecrutationFormComponent {
         if (response) {
           newRecrutationDto['externalId'] = v4();
           newRecrutationDto['userExternalId'] = localStorage.getItem('userExternalId');
-          this.apiService
-            .sendPostRequest('recrutations', newRecrutationDto)
-            .pipe(
-              catchError(this.errorHandlerService.errorHandler),
-              tap(() => {
-                const result = {
-                  title: 'Recrutation successfully created',
-                  status: NotificationStatusEnum.Success,
-                  cssClass: NotificationClassEnum.Success,
-                };
-
-                this.notificationService.notificationsHandler.next(result);
-                this.router.navigate(['/home']);
-              })
-            )
-            .subscribe(() => {
-              return;
-            });
+          this.recrutationService.addNewRecrutation(newRecrutationDto);
         } else {
           return;
         }
