@@ -11,3 +11,12 @@ Simple single page app which helps user better mananagement of active recrutatio
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+
+## Run
+
+Run `npm start` or `ng serve` to run this project. 
+
+## Micro-front-ends
+
+Soon :)
