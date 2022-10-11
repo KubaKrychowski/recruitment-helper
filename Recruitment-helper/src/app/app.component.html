@@ -1,5 +1,10 @@
 <main>
-  <app-nav-bar></app-nav-bar>
+  <nav>
+    <ng-container *ngIf="!isMobile; else mobileNavBar">
+      <app-nav-bar></app-nav-bar>
+    </ng-container>
+  </nav>
+
   <section>
     <article>
       <router-outlet></router-outlet>
@@ -10,3 +15,7 @@
     <app-notifications *ngIf="notification" [notification]="notification"></app-notifications>
   </section>
 </main>
+
+<ng-template #mobileNavBar>
+  <app-mobile-nav-bar></app-mobile-nav-bar>
+</ng-template>

@@ -27,6 +27,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { NotificationService } from './services/notification.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { RecrutationService } from './services/recrutation.service';
+import { MobileNavBarComponent } from './mobile-nav-bar/mobile-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RecrutationService } from './services/recrutation.service';
     RecrutationInfoItemExtendedDialogComponent,
     NotificationsComponent,
     SignUpComponent,
+    MobileNavBarComponent,
   ],
   imports: [
     BrowserModule,

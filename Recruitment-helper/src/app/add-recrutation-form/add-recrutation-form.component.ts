@@ -1,7 +1,6 @@
 import { RecrutationService } from 'src/app/services/recrutation.service';
 import { DictionaryService } from './../shared/dictionary/dictionary.service';
 import { v4 } from 'uuid';
-import { ApiService } from './../services/api.service';
 import { ConfirmChangesDialogComponent } from './confirm-changes-dialog/confirm-changes-dialog.component';
 import { ExtranInformationCheckboxModel } from './../shared/models/extra-information-checkbox.model';
 import { Component } from '@angular/core';
@@ -13,7 +12,6 @@ import {
   NotificationStatusEnum,
 } from '../shared/models/notification.model';
 import { NotificationService } from '../services/notification.service';
-import { ErrorHandlerService } from '../services/error-handler.service';
 
 @Component({
   selector: 'app-add-recrutation-form',
@@ -79,10 +77,8 @@ export class AddRecrutationFormComponent {
     private bsModalRef: BsModalRef,
     private modalService: BsModalService,
     public router: Router,
-    private apiService: ApiService,
     private dictionaryService: DictionaryService,
     private notificationService: NotificationService,
-    private errorHandlerService: ErrorHandlerService,
     private recrutationService: RecrutationService
   ) {
     this.workTypes = this.dictionaryService._workTypes;
@@ -100,7 +96,7 @@ export class AddRecrutationFormComponent {
     }
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this._form.markAllAsTouched();
 
     if (this._form.valid) {
@@ -172,7 +168,7 @@ export class AddRecrutationFormComponent {
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  setDateTime(date: Date, time: Date) {
+  private setDateTime(date: Date, time: Date) {
     date.setHours(time.getHours());
     date.setMinutes(time.getMinutes());
 

@@ -1,0 +1,14 @@
+.mobile-nav-bar-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1em;
+  background-color: rgb(235, 235, 235);
+
+  .menu-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+  }
+}

@@ -15,6 +15,9 @@ import { NotificationService } from './services/notification.service';
 })
 export class AppComponent {
   notification: NotificationModel | null = null;
+  public get isMobile(): boolean {
+    return window.innerWidth <= 786;
+  }
   constructor(
     private notificationService: NotificationService,
     private apiService: ApiService,

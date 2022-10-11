@@ -11,9 +11,9 @@ export class UserService {
   public currentUser: Subject<SimplifiedUserDataModel | null> =
     new Subject<SimplifiedUserDataModel | null>();
   public isUserLoggedIn: boolean = false;
-  constructor(private apiService: ApiService,private router: Router) {
-    this.currentUser.subscribe(user => {
-      if(user?.externalId){
+  constructor(private apiService: ApiService, private router: Router) {
+    this.currentUser.subscribe((user) => {
+      if (user?.externalId) {
         this.isUserLoggedIn = true;
       } else {
         this.isUserLoggedIn = false;
