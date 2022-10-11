@@ -1,15 +1,16 @@
 <section class="mobile-nav-bar-container">
-<ul class="menu-list">
-  <li>
-    1st item
-  </li>
+<ul *ngIf="menuItems" class="menu-list">
+  <li *ngFor="let item of menuItems" class="menu-list-item">
+    <div
+      [routerLink]="item.url"
+      class="nav-link text-black col text-align-center">
 
-  <li>
-    1st item
-  </li>
+      <i [class]="item.iconClass"></i>
 
-  <li>
-    1st item
+      <p class="m-0">
+        {{ item.name }}
+      </p>
+    </div>
   </li>
 </ul>
 </section>

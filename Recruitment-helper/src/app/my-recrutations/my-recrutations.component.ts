@@ -8,6 +8,7 @@ import { RecrutationService } from '../services/recrutation.service';
 })
 export class MyRecrutationsComponent implements OnInit {
   recrutations: any = [];
+
   constructor(
     public recrutationService: RecrutationService
   ) {

@@ -1,3 +1,22 @@
-.col{
+.col {
   display: flex;
+}
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15%;
+
+  .spinner {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .spinner-container{
+    margin-top: 35%;
+    height: 10%;
+  }
 }

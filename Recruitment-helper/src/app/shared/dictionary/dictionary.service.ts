@@ -1,3 +1,4 @@
+import { MenuItemModel } from './../models/menu-item.model';
 import { Injectable } from '@angular/core';
 import { ExtranInformationCheckboxModel } from '../models/extra-information-checkbox.model';
 
@@ -12,7 +13,7 @@ export class DictionaryService {
     'contract for performance of a specific task',
     'B2B',
   ];
-  
+
   //? custom benefits/informations in add recrutation form
   private readonly extraCheckboxesArray: ExtranInformationCheckboxModel[] = [
     {
@@ -33,6 +34,29 @@ export class DictionaryService {
     },
   ];
 
+  //? menu-items
+  private readonly menuItemsArray: MenuItemModel[] = [
+    {
+      name: 'Home',
+      iconClass: 'bi bi-house-door',
+      url: 'home'
+    },
+    {
+      name: 'My recrutations',
+      iconClass: 'bi bi-list-columns-reverse',
+      url: 'my-recrutations'
+    },
+    {
+      name: 'Calendar',
+      iconClass: 'bi bi-calendar-date',
+      url: '/'
+    },
+    {
+      name: 'Notes',
+      iconClass: 'bi bi-sticky',
+      url: '/'
+    },
+  ]
   public get _workTypes(): string[] {
     return this.workTypes;
   }
@@ -43,5 +67,9 @@ export class DictionaryService {
 
   public get _extraCheckboxesArray(): ExtranInformationCheckboxModel[] {
     return this.extraCheckboxesArray;
+  }
+
+  public get _menuItemsArray(): MenuItemModel[] {
+    return this.menuItemsArray;
   }
 }

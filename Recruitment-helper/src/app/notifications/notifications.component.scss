@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 30vw;
   height: 8vh;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.notification-content{
+.notification-content {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,9 +25,15 @@
 }
 
 .warning {
-  background-color:rgb(250, 192, 32);
+  background-color: rgb(250, 192, 32);
 }
 
-.danger{
+.danger {
   background-color: rgb(247, 39, 39);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
 }

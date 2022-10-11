@@ -7,3 +7,21 @@
   justify-content: center;
   margin-left: 2%;
 }
+
+@media screen and (max-width: 786px) {
+  .quick-actions-container{
+    width: 50%;
+    margin-left: 5%;
+
+    .quick-actions{
+      display: flex;
+      flex-direction: column;
+
+      .action{
+        width: 100%;
+        margin-bottom: 2%;
+      }
+    }
+  }
+
+}

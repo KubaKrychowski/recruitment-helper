@@ -1,4 +1,6 @@
+import { DictionaryService } from './../shared/dictionary/dictionary.service';
 import { Component, OnInit } from '@angular/core';
+import { MenuItemModel } from '../shared/models/menu-item.model';
 
 @Component({
   selector: 'app-mobile-nav-bar',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mobile-nav-bar.component.scss']
 })
 export class MobileNavBarComponent implements OnInit {
+  public menuItems: MenuItemModel[] | null = null;
 
-  constructor() { }
+  constructor(private dictionaryService: DictionaryService) { }
 
   ngOnInit(): void {
+    this.menuItems = this.dictionaryService._menuItemsArray;
   }
 
 }

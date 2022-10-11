@@ -8,3 +8,11 @@
   left: 50%;
   transform: translate(-50%, 0);
 }
+
+
+@media screen and (max-width: 786px) {
+  .notifications{
+    top: 0%;
+    bottom: 0;
+  }
+}

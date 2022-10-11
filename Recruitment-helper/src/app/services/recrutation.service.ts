@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class RecrutationService {
   public refreshListingHandler: Subject<boolean> = new Subject();
   public recrutations: Subject<Array<any>> = new Subject();
-
+  public isFetching: boolean = false;
   constructor(
     private apiService: ApiService,
     private errorHandlerService: ErrorHandlerService,
@@ -30,6 +30,7 @@ export class RecrutationService {
   }
 
   refreshListing(): void {
+    this.isFetching = true;
     this.apiService
       .sendGetRequest(`recrutations/${localStorage.getItem('userExternalId')}`)
       .pipe(
@@ -43,6 +44,7 @@ export class RecrutationService {
           }
 
           this.recrutations.next(_recrutations);
+          this.isFetching = false;
         })
       )
       .subscribe(() => {

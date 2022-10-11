@@ -1,32 +1,31 @@
 <section class="container-fluid p-3">
   <header class="header mt-3">
     <h1>My recrutaions list</h1>
-    <hr>
+    <hr />
   </header>
 
-  <article>
+  <article [hidden]="recrutationService.isFetching">
     <div class="container text-center">
       <div class="row border-bottom">
-        <div class="col">
-          Company Name
-        </div>
+        <div class="col">Company Name</div>
 
-        <div class="col">
-          Salary
-        </div>
+        <div class="col">Salary</div>
 
-        <div class="col">
-          Position
-        </div>
+        <div class="col">Position</div>
 
-        <div class="col">
-          Work type
-        </div>
+        <div class="col">Work type</div>
       </div>
 
       <div class="row" *ngFor="let recrutation of recrutationService.recrutations | async">
-        <app-recrutation-info-item [recrutation]="recrutation"></app-recrutation-info-item>
+        <app-recrutation-info-item
+          [recrutation]="recrutation"
+        ></app-recrutation-info-item>
       </div>
     </div>
   </article>
+
+  <div class="spinner-container" *ngIf="recrutationService.isFetching">
+    <div class="spinner-border text-secondary spinner" role="status">
+    </div>
+  </div>
 </section>

@@ -1,0 +1,13 @@
+@media screen and (max-width: 768px) {
+  .form-signin {
+    width: 80vw !important;
+    height: 80vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .auth-logo {
+      width: 80%;
+    }
+  }
+}

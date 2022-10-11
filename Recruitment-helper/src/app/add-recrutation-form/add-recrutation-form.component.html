@@ -1,4 +1,4 @@
-<section class="container-fluid p-4">
+<section class="container-fluid p-4 main-container">
   <header class="header">
     <h1 class="fs-1">
       Add new recrtutation
@@ -9,8 +9,8 @@
 
   <article>
     <form (ngSubmit)="onSubmit()" [formGroup]="_form">
-      <div class="row w-100">
-        <div class="col-5 border-end">
+      <div class="row w-100 form-container">
+        <div class="col-5 border-end left-col">
           <h6 class="mt-3 text text-primary">
             Basic informations:
           </h6>
@@ -18,6 +18,7 @@
           <hr class="border border-primary border-1 opacity-50" />
 
           <form
+            class="form"
             formGroupName="basicInformations"
             [formGroup]="basicInformationsForm">
 
@@ -107,6 +108,7 @@
           <hr class="border border-success border-1 opacity-50" />
 
           <form
+            class="form"
             formGroupName="workOrganizationInformations"
             [formGroup]="workOrganizationInformationsForm">
 
@@ -167,7 +169,7 @@
           </form>
         </div>
 
-        <div class="col-5">
+        <div class="col-5 right-col">
           <h6 class="mt-3 text text-danger">
             Recrutation informations:
           </h6>
@@ -175,6 +177,7 @@
           <hr class="border border-danger border-1 opacity-50" />
 
           <form
+            class="form"
             formGroupName="recrutationInformations"
             [formGroup]="recrutationInformationsForm">
 
@@ -232,6 +235,7 @@
               </label>
 
               <timepicker
+              class="timepicker-container"
                 formControlName="meetingHour"
                 [class.border-danger]="
                   !recrutationInformationsForm.controls['meetingHour'].valid &&
@@ -259,7 +263,7 @@
               </label>
             </div>
 
-            <div class="row mt-3">
+            <div class="row justify-content-center mt-3">
               <div class="col-5">
                 <label class="form-label" for="min-salary">
                   Min. Salary
@@ -331,7 +335,7 @@
           <hr class="border border-warning border-1 opacity-50" />
 
           <div class="row-5 mt-3">
-            <form [formGroup]="extraInformationsForm">
+            <form class="form" [formGroup]="extraInformationsForm">
               <div
                 *ngFor="let extraInformation of extraCheckboxesArray"
                 class="form-check">

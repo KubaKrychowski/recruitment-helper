@@ -12,3 +12,33 @@ input[type=number] {
   margin-top: 2%;
   column-gap: 1em;
 }
+
+@media screen and (max-width: 786px){
+  .main-container{
+    margin-bottom: 75px;
+  }
+  .form-container {
+    flex-direction: column !important;
+
+    .left-col,.right-col {
+      border-right: 0 !important;
+      width: 100%;
+      text-align: center;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timepicker-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .btn {
+    width: min-content !important;
+  }
+}
