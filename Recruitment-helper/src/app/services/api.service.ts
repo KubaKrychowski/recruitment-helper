@@ -2,11 +2,10 @@ import { SimplifiedUserDataModel } from './../shared/models/simplified-user-data
 import { UserLoginDataDtoModel } from './../shared/models/user-login-data-dto.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { UserRegisterDataDtoModel } from '../shared/models/user-register-data-dto.model';
 import { Subject, Observable } from 'rxjs';
 
-const API_URL = environment.apiURL || 'Pass your url here';
+const API_URL = 'localhost:3000/api/';
 
 @Injectable({
   providedIn: 'root',

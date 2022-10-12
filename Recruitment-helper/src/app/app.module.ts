@@ -2,7 +2,7 @@ import { UserService } from './services/user.service';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +28,7 @@ import { NotificationService } from './services/notification.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { RecrutationService } from './services/recrutation.service';
 import { MobileNavBarComponent } from './mobile-nav-bar/mobile-nav-bar.component';
+import { createCustomElement } from '@angular/elements';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,17 @@ import { MobileNavBarComponent } from './mobile-nav-bar/mobile-nav-bar.component
     UserService,
     RecrutationService
   ],
-  bootstrap: [AppComponent],
+  // bootstrap: [AppComponent],
+  entryComponents: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(private injector: Injector){
+
+  }
+
+  ngDoBootstrap(): void {
+    const element = createCustomElement(AppComponent, { injector: this.injector});
+    customElements.define('app-micro-fe', element);
+  }
+}
