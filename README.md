@@ -19,4 +19,5 @@ Run `npm start` or `ng serve` to run this project.
 
 ## Micro-front-ends
 
-Soon :)
+Run `npm run bundle` to build dist folde and then inside of `recruitment-helper` folder in `dist` run 
+`http-server -p PORT`
